@@ -1,0 +1,30 @@
+{% extends "layout/main.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h1 class="text-center" style="margin-top: 60px" >CHI TIẾT SẢN PHẨM</h1>
+        <div class="col-md-6 order-1" style="margin-top: 40px" >
+            <div class="image_selected">
+                <img src="/media/{{ detail.sp_hinhanh }}" style="width:350px;height:350px">
+            </div>
+        </div>
+        <!-- Description -->
+        <div class="col-md-6 order-2" style="margin-top: 40px">
+            <ul class="list-group mt-5">
+                <li class="list-group-item border-none"><b>Thông tin sản phẩm:</b> {{detail.sp_ten}} </li>
+                <li class="list-group-item border-none">Giá: {{detail.sp_gia}} </li>
+                <li class="list-group-item border-none">
+                Số lượng: <input type="number" name="" id="number" value="{{detail.sp_soluong}}" min="1" max="{{detail.sp_soluong}}">
+                </li>
+                <li class="list-group-item border-none">Loại: {{detail.l_id}}</li>
+                <!-- <li class="list-group-item border-none"><button class="btn btn-primary" type="submit">Thêm vào giỏ hàng</button></li> -->
+            </ul>
+            
+            <div class="col-12 mt-5 order-3">
+                <h4><b>Mô tả sản phẩm:</b> </h4>
+                <p>{{detail.sp_mota}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

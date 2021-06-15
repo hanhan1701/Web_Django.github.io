@@ -1,0 +1,102 @@
+{% extends "layout/main.html" %}
+{% block content %}
+{% load cart %}
+    <h1 class="text-center" style="margin-top: 10px">GIỎ HÀNG</h1>
+        <div class="cart-main-area ptb--100 bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">              
+                        <div class="table-content table-responsive" style="color: black; margin-top: -50px">
+                            <!-- {{products}} -->
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Hình ảnh</th>
+                                        <th class="product-name">Tên sản phẩm</th>
+                                        <th class="product-price">Giá</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                        <th class="product-subtotal">Tổng</th>
+                                        <th class="product-remove">Xóa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        {% for product in products %}
+                                        <tr>
+                                            <td>{{forloop.counter}}</td>
+                                            <td><img style="height: 80px;" src="/media/{{ product.sp_hinhanh }}"></td>
+                                            <td>{{product.sp_ten}}</td>
+                                            <td>{{product.sp_gia}}</td>
+                                            <td>{{product|cart_quantity:request.session.cart}}</td> <!-- templatetags/cart.py --> 
+                                            <td>{{product|price_total:request.session.cart}}</td>
+                                            <td>
+                                                <form action="/home/cart" method="POST" onsubmit="return confirm('Có muốn xóa hông')">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="productId" value={{product.id}}>
+                                                    <label>
+                                                        <input type="submit" style="display: none">
+                                                        <i class="icon-trash icons"></i>
+                                                    </label>  
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="4"></th>
+                                        <th colspan="">Tổng cộng:</th>
+                                        <th>{{products|total_cart_price:request.session.cart}} VND</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="buttons-cart--inner">
+                                    <div class="buttons-cart">
+                                        <a href="/">Tiếp tục mua hàng</a>
+                                    </div>
+                                    <div class="buttons-cart checkout--btn" >
+                                        <a href=""data-toggle="modal" data-target="#exampleModal">Thanh toán</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"> TIẾN HÀNH THANH TOÁN</h5>
+          <!-- <hr> -->
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="m-2 p-3">
+                <form action="/checkout" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="">Địa chỉ</label>
+                        <input id="" class="form-control" type="text" name="address"placeholder="" aria-describedby="helpId">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Số điện thoại</label>
+                        <input id="" class="form-control" type="text" name="phone"placeholder="" aria-describedby="helpId">
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="Đặt hàng">
+                </form>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+{% endblock %}

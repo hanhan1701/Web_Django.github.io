@@ -1,0 +1,73 @@
+{% extends "layout/main.html" %}
+{% block content %}
+{% load cart %}
+<section class="htc__category__area ptb--100">
+    <div class="container">
+        <div class="row">
+            {% for item in productcat %}
+            <div class="col-xs-12">
+                <div class="section__title--2 text-center"style="margin-top: -60px;">
+                    <h2 class="title__line"style = "font-family:arial;">Sản Phẩm {{item.l_id}}</h2>
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
+        <div class="htc__product__container">
+            <div class="row">
+                <div class="product__list clearfix mt--30">
+                    {% for item in productcat %}
+                    <!-- Start Single Category -->
+                    <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
+                        <div class="category">
+                            <div class="ht__cat__thumb">
+                                <a href="{% url 'chitietsp' item.id  %}">
+                                    <img src="/media/{{ item.sp_hinhanh }} " alt="product images" />
+                                </a>
+                            </div>
+                            <div class="fr__hover__info">
+                                <ul class="product__action">
+                                    <li><a href="#" ><i class="icon-shuffle icons"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="fr__product__inner">
+                                <h4><a href="">{{item.sp_ten}}</a></h4>
+                                <ul class="fr__pro__prize">
+                                    <li>{{item.sp_gia}}</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer p-0 no-gutters">
+                                {% if item|is_in_cart:request.session.cart %}
+						        <div class="row no-gutters">
+							        <form action="/#{{item.id}}" class="col-2 " method="post">
+								        {% csrf_token %}
+								        <input hidden type="text" name='product' value='{{item.id}}'>
+								        <input hidden type="text" name='remove' value='True'>
+								        <input style="margin-left: 1.5rem;" type="submit" value=" – " class="btn btn-light border-left">
+							        </form>
+							        <div class="text-center col-6">{{item|cart_quantity:request.session.cart}} sản phẩm trong giỏ</div>
+							        <form action="/#{{item.id}}" class="col-2 " method="post">
+								        {% csrf_token %}
+								        <input hidden type="text" name='product' value='{{item.id}}'>
+								        <input type="submit" value=" + " class="btn btn-light border-left">
+							        </form>
+						        </div>
+						        {% else %}
+						        <form action="/#{{item.id}}" method="POST" class="btn-block">
+							        {% csrf_token %}
+							        <input hidden type="text" name='product' value='{{item.id}}'>
+							        <input type="submit" class="float-right btn btn-info  form-control"value="Thêm vào giỏ">
+						        </form>
+						        {% endif %}
+
+					        </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- End Single Category -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}

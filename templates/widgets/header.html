@@ -1,0 +1,80 @@
+{% load static %}
+<header id="htc__header" class="htc__header__area header--one">
+    <!-- Start Mainmenu Area -->
+    <div id="sticky-header-with-topbar" class="mainmenu__wrap sticky__header">
+        <div class="container">
+            <div class="row">
+                <div class="menumenu__container clearfix">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5"> 
+                        <div class="logo">
+                             <a href="/"><img src="{% static 'images/logo/4.png' %}" alt="logo images"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-8 col-sm-5 col-xs-3">
+                        <nav class="main__menu__nav hidden-xs hidden-sm">
+                            <ul class="main__menu">
+                                <li class="drop"><a href="/">Trang chủ</a></li>
+                                <li class="drop"><a href="#">Loại sản phẩm</a>
+                                    <ul class="dropdown mega_dropdown">
+                                        <!-- Start Single Mega MEnu -->
+                                        <li>
+                                            {% for itemcate in loai_objs %}
+                                            <ul class="mega__item">
+                                                <li><a href="/home/productcat/{{itemcate.id}}">{{itemcate.l_ten}}</a></li>
+                                            </ul>
+                                            {% endfor %}
+                                        </li>
+                                        <!-- End Single Mega MEnu -->
+                                    </ul>
+                                </li>
+                                <li class="drop"><a href="/home/product">Sản phẩm</a>
+                                <!-- <li><a href="/home/contact">Liên hệ</a></li> -->
+                            </ul>
+                        </nav>
+
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-sm-4 col-xs-4">
+                        {{kh_khachhang}}
+                        <div class="header__right">
+                            <!-- <div class="header__search search search__open">
+                                <a href="#"><i class="icon-magnifier icons"></i></a>
+                            </div> -->
+                            <!-- <div class="header__account">
+                                <a href="/signup"><i class="icon-user icons" title="Đăng kí"></i></a>
+                            </div>
+                            <div class="header__account">
+                                <a href="/login"><i class="fa fa-sign-in" aria-hidden="true" title="Đăng nhập" ></i></a>
+                            </div>
+                            <div class="header__account">
+                                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true" title="Đăng xuất"></i></a>
+                            </div>
+                            <div class="htc__shopping__cart">
+                                <a  href="/home/cart"><i class="icon-handbag icons"></i></a>
+                            </div> -->
+                            {% if request.session.kh_khachhang %}
+                            <div class="header__account">
+                                <a href="/logout"><i class="" aria-hidden="true" title="Đăng xuất"></i>Logout</a>
+                            </div>
+                            <div class="htc__shopping__cart">
+                                <a  href="/home/cart"><i class="icon-handbag icons"></i></a>
+                            </div>
+                            {% else %}
+                            <div class="header__account">
+                                <a href="/signup"><i class="" title="Đăng kí"></i>Signup</a>
+                            </div>
+                            <div class="header__account">
+                                <a href="/login"><i class="" aria-hidden="true" title="Đăng nhập" ></i>Login</a>
+                            </div>
+                            <div class="htc__shopping__cart">
+                                <a  href="/home/cart"><i class="icon-handbag icons"></i></a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Mainmenu Area -->
+</header>
+

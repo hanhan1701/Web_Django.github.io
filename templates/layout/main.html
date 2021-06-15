@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+{%  include "../widgets/metadata.html" %}
+<body>
+    
+    <div class="wrapper">
+        <!-- Start Header Style -->
+        {%  include "../widgets/header.html" %}
+        <!-- End Header Area -->
+        {% block content %}
+
+        {% endblock %}
+        
+        <!-- Start Footer Area -->
+        {%  include "../widgets/footer.html" %} 
+        <!-- End Footer Style -->
+    </div>
+    
+
+
+    <!-- jquery latest version -->
+    <script src="{% static 'js/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap framework js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- All js plugins included in this file. -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!-- Waypoints.min.js. -->
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <!-- Main js file that contents all jQuery plugins activation. -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'jss/cart.js' %}"></script>
+
+
+</body>
+
+</html>

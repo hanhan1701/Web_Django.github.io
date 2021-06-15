@@ -1,0 +1,73 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="en">
+{%  include "../widgets/metadata.html" %}
+<body>
+    
+    <div class="wrapper">
+        {%  include "../widgets/header.html" %}
+        <div class="container mt-4" style="margin-top: 100px;">
+            <div class="p-3 m-4"style="margin-left: 400px;">
+                <div class="col-lg-5 mt-5 border mb-5 mx-auto rounded pt-5">
+                    <div class="text-center col">
+                        <h2>ĐĂNG NHẬP</h2>  
+                    </div>
+                    <h3 hidden class="alert alert-light border mt-4 mb-4 rounded">ĐĂNG NHẬP</h3>
+                    <form action="/login/" method="POST">
+                        
+                        {% csrf_token %}
+        
+                        {% if error%}
+                        <div class="alert alert-danger" role="alert">
+                            {{error}}
+                        </div>
+                        {% endif %}
+                        <!-- email -->
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input required type="email" name="email" id=""
+                            value="{{values.email}}" 
+                            class=" form-control-sm form-control" placeholder="example@gmail.com">
+                        </div>
+        
+        
+                        <!-- password -->
+                        <div class="form-group">
+                            <label for="">Mật khẩu</label>
+                            <input type="password" 
+                            name="password" 
+                            id=""
+                             class="form-control form-control-sm" placeholder="********">
+                        </div>
+        
+                        <hr>
+                        <div class="form-group">
+                            <input class="btn btn-sm btn-info col-lg-4" type="submit" value="Đăng nhập">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <!-- jquery latest version -->
+    <script src="{% static 'js/vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap framework js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- All js plugins included in this file. -->
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!-- Waypoints.min.js. -->
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <!-- Main js file that contents all jQuery plugins activation. -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'jss/cart.js' %}"></script>
+
+
+</body>
+
+</html>
